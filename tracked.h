@@ -26,3 +26,4 @@ protected:
     void SetUp() override { alive_count = 0; }
     void TearDown() override { EXPECT_EQ(alive_count, 0) << "Memory leak: not all objects destroyed"; }
 };
+
