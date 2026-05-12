@@ -83,7 +83,6 @@ Array<T>::Array(const Array& other) : data_(new T[other.size_]), size_(other.siz
     }
 }
 
-// ← УБРАЛ noexcept (было: Array(Array&& other) noexcept)
 template <typename T>
 Array<T>::Array(Array&& other) : data_(other.data_), size_(other.size_) {
     other.data_ = nullptr;
@@ -103,7 +102,6 @@ Array<T>& Array<T>::operator=(const Array& other) {
     return *this;
 }
 
-// ← УБРАЛ noexcept (было: operator=(Array&& other) noexcept)
 template <typename T>
 Array<T>& Array<T>::operator=(Array&& other) {
     if (this != &other) {
