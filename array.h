@@ -67,19 +67,35 @@ template <typename T>
 Array<T>::Array() : data_(nullptr), size_(0) {}
 
 template <typename T>
-Array<T>::Array(size_t size) : data_(new T[size]), size_(size) {}
-
-template <typename T>
-Array<T>::Array(size_t size, const T& value) : data_(new T[size]), size_(size) {
-    for (size_t i = 0; i < size_; ++i) {
-        data_[i] = value;
+Array<T>::Array(size_t size) : size_(size) {
+    if (size_ == 0) {
+        data_ = nullptr;
+    } else {
+        data_ = new T[size_];
     }
 }
 
 template <typename T>
-Array<T>::Array(const Array& other) : data_(new T[other.size_]), size_(other.size_) {
-    for (size_t i = 0; i < size_; ++i) {
-        data_[i] = other.data_[i];
+Array<T>::Array(size_t size, const T& value) : size_(size) {
+    if (size_ == 0) {
+        data_ = nullptr;
+    } else {
+        data_ = new T[size_];
+        for (size_t i = 0; i < size_; ++i) {
+            data_[i] = value;
+        }
+    }
+}
+
+template <typename T>
+Array<T>::Array(const Array& other) : size_(other.size_) {
+    if (size_ == 0) {
+        data_ = nullptr;
+    } else {
+        data_ = new T[size_];
+        for (size_t i = 0; i < size_; ++i) {
+            data_[i] = other.data_[i];
+        }
     }
 }
 

@@ -157,17 +157,11 @@ Optional<T>::operator bool() const {
 
 template <typename T>
 T& Optional<T>::value() {
-    if (!has_value_) {
-        throw std::bad_optional_access();
-    }
     return *ptr();
 }
 
 template <typename T>
 const T& Optional<T>::value() const {
-    if (!has_value_) {
-        throw std::bad_optional_access();
-    }
     return *ptr();
 }
 
@@ -201,7 +195,7 @@ template <typename... Args>
 T& Optional<T>::emplace(Args&&... args) {
     reset();
     has_value_ = true;
-    new (storage_) T(static_cast<Args>(args)...);
+    new (storage_) T(std::forward<Args>(args)...);
     return *ptr();
 }
 
